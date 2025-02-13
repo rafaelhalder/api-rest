@@ -15,7 +15,8 @@ app.get("/products",(request,response) => {
 
 app.post('/products', (request,response) => {
   const {name,price} = request.body;
-  // response.send(`${name},${price}`)
+  // response.send(`${name},${price}`)dasdsad
+  
   response.status(201).json({name,price})
 })
 
