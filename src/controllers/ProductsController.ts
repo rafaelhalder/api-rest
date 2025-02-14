@@ -1,5 +1,6 @@
 import {Request, Response} from "express"
 import { AppError } from "../utils/AppError";
+import {z} from "zod"
 class ProductsController{
 /**
  * index - GET listar
@@ -15,7 +16,14 @@ class ProductsController{
   }
 
   create(request: Request, response: Response){
-    const {name,price} = request.body;
+
+    const bodySchema = z.object({
+      name:z.string().trim().min(6,{message: "minimo 6 caracteres"}), // minimo 6 caracteres
+      //name:z.string().min(6), // minimo 6 caracteres
+      price:z.number({required_error: "Price is required"}).positive({message: "price most be positivo"}).gte(10)
+      //price:z.number().nullish() // OPCIONAL
+    })
+    const {name,price} = bodySchema.parse(request.body)
 
     if(!name || !price){
       throw new AppError("Nome faltante")

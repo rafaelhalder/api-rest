@@ -10,3 +10,4 @@ e alterar todos os campos que tem lá
 
 npm i express@4.19.2
 npm i --save-dev @types/express
+npm i zod@3.23.8
